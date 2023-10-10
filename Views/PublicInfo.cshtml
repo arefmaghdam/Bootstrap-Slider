@@ -1,0 +1,33 @@
+﻿@model PublicInfoModel
+
+<style type="text/css">
+    .carousel-caption {
+        position: absolute;
+        top: 30px;
+        left: auto;
+        right: auto;
+    }
+</style>
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < Model.Slide.Count(); i++)
+        {
+            <li data-target="#carousel" data-slide-to="@i" class="@(i == 0 ? "active" : string.Empty)"></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Slide.Count(); i++)
+        {
+            <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                <picture>
+                    <source media="(max-width: 768px) and (-webkit-max-device-pixel-ratio: 4), (max-width: 768px) and (max-resolution: 192dpi)" srcset="@Model.Slide[i].Picture2Url" />
+                    <img src="@Model.Slide[i].PictureUrl" alt="@Model.Slide[i].Name" style="width:auto;" width="1905" height="496" />
+                </picture>
+                <div class="carousel-caption d-md-block">
+                    @Html.Raw(Model.Slide[i].Description)
+                </div>
+            </div>
+        }
+    </div>
+</div>
